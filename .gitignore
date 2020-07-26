@@ -1,3 +1,9 @@
+# Mac OS cruft
+.DS_Store
+
+# Emacs cruft
+*.~
+
 # History files
 .Rhistory
 .Rapp.history
