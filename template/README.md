@@ -38,7 +38,7 @@ intercept | 5.0
 x | 0.15
 
 ![Example Figure](example.png)
-
+*Wikimedia Commons / Public Domain*
 
 
 
