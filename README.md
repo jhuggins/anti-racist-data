@@ -16,11 +16,19 @@ perhaps organized by type of analysis/data type.*
 
 ## Contributing
 
-If you would like to contribute a dataset, you will need to follow the detailed
-instructions in the [template](template/) directory.
-Our preference is that you fork the repository, add your dataset directory
+### Dataset
+If you would like to contribute a dataset, the preferred method is that you
+fork the repository, add your dataset directory
 to [datasets](datasets/), and then [create a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
 Alternatively, please email your proposed dataset entry to [huggins@bu.edu](mailto:huggins@bu.edu).
+Detailed instructions for how to structure your dataset directory
+can be found in the [template](template/) directory.
+
+### Analysis
+
+If you would like to contribute a new analysis of an existing dataset,
+our preference is that you create a pull request.
+Alternatively, you can email your proposed modifications to [huggins@bu.edu](mailto:huggins@bu.edu).
 
 ## License
 
