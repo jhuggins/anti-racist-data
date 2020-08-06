@@ -34,6 +34,6 @@ However, it does not provide a causal explanation.
 
 ## Sources and Licenses
 
-* [US-covid-cases-deaths-by-state-race.csv](US-covid-cases-deaths-by-state-race.csv): <a href="https://covidtracking.com/">The COVID Tracking Project</a>.
-This data is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>
-* [US-covid-cases-deaths-population-by-state-race.csv](US-covid-cases-deaths-population-by-state-race.csv): <a href="https://www.kff.org/other/state-indicator/distribution-by-raceethnicity/">Kaiser Family Foundation: Population Distribution by Race/Ethnicity (2018)</a>
+* *US-covid-cases-deaths-by-state-race.csv*: <a href="https://covidtracking.com/">The COVID Tracking Project</a>.
+This data is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+* *US-covid-cases-deaths-population-by-state-race.csv*: <a href="https://www.kff.org/other/state-indicator/distribution-by-raceethnicity/">Kaiser Family Foundation: Population Distribution by Race/Ethnicity (2018)</a>.
