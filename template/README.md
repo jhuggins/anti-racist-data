@@ -23,9 +23,9 @@ For example, *%dataset%-standardized.csv* or *%dataset%-cleaned.csv*.
 Include any scripts used create the processed versions from the original.
 Scripts should be prefixed with *generate-*, then the name of the dataset
 that is output.
-For example, *generate-%dataset%-standardized.R* or *generate-%dataset%-claned.R*.
+For example, *generate-%dataset%-standardized.R* or *generate-%dataset%-cleaned.R*.
 
-## Example Analysis ##
+## Example Analysis
 
 You may optionally provide example analyses, including output numeric
 and graphical results like the examples below.
