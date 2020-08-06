@@ -1,4 +1,4 @@
-# U.S. state-level cumulative COVID cases and deaths by race
+# U.S. state-level COVID cases and deaths by race
 
 ## Overview
 
@@ -17,18 +17,19 @@ with the output [here](US-covid-cases-deaths-population-by-state-race.csv).
 ## Example Analysis
 
 This [python script](create-expected-versus-observed-deaths-plots.py) was used
-to compare the expected proportion of COVID deaths (based on the population) with the
-observed proportion of deaths.
-Each dot is a single state and the blue line is least squares linear regression fit
-and 95% confidence interval.
-The black dotted "`x = y`" is where we would expect states to fall if COVID were
+to compare the expected proportion of COVID deaths (based on the population)
+with the observed proportion of deaths.
+Each dot is a single state and the blue line is least squares linear regression
+fit and 95% confidence interval.
+The black dotted line indicates where we would expect states to lie if COVID were
 equally deadly to blacks and non-blacks.
 
 ![Expected vs Observed Deaths (White)](expected-versus-observed-deaths-white.png)
 ![Expected vs Observed Deaths (Black)](expected-versus-observed-deaths-black.png)
 
-While further adjustments would be ideal (for example, to account for age composition effects),
-this data suggests COVID disproportionately affects the black community.
+While further adjustments would be ideal (for example, to account for age
+composition effects), this data suggests COVID disproportionately affects the
+black community.
 However, it does not provide a causal explanation.
 
 ## Sources and Licenses
