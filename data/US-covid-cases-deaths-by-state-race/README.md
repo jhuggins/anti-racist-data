@@ -9,14 +9,14 @@ for comparison.
 
 ## Description
 
-The original COVID data is [here](US-covid-cases-deaths-by-state-race.csv)
-and the population-level data is [here](US-population-distribution-by-state.csv).
-The two sources are combined using [this script](generate-US-covid-cases-deaths-population-by-state-race.py),
-with the output [here](US-covid-cases-deaths-population-by-state-race.csv).
+The original COVID data is [here](data/US-covid-cases-deaths-by-state-race.csv)
+and the population-level data is [here](data/US-population-distribution-by-state.csv).
+The two sources are combined using [this script](python/generate-US-covid-cases-deaths-population-by-state-race.py),
+with the output [here](data/US-covid-cases-deaths-population-by-state-race.csv).
 
 ## Example Analysis
 
-This [python script](create-expected-versus-observed-deaths-plots.py) was used
+This [python script](data/create-expected-versus-observed-deaths-plots.py) was used
 to compare the expected proportion of COVID deaths (based on the population)
 with the observed proportion of deaths.
 Each dot is a single state and the blue line is least squares linear regression
@@ -24,8 +24,8 @@ fit and 95% confidence interval.
 The black dotted line indicates where we would expect states to lie if COVID were
 equally deadly to blacks and non-blacks.
 
-![Expected vs Observed Deaths (White)](expected-versus-observed-deaths-white.png)
-![Expected vs Observed Deaths (Black)](expected-versus-observed-deaths-black.png)
+![Expected vs Observed Deaths (White)](output/expected-versus-observed-deaths-white.png)
+![Expected vs Observed Deaths (Black)](output/expected-versus-observed-deaths-black.png)
 
 While further adjustments would be ideal (for example, to account for age
 composition effects), this data suggests COVID disproportionately affects the
