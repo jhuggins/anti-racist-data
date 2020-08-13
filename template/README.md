@@ -20,8 +20,8 @@ All file names should use hyphens (rather than underscores) to separate words.
 All data files should be placed in a subdirectory named *data*.
 The original dataset should have the same name as your directory name plus the
 appropriate file type extension
-That is your contribution is in *datasets/%dataset%* the relative path would
-be *data/%dataset%.csv*.
+That is, if your contribution is in *datasets/%dataset%*, then the relative path
+would be *data/%dataset%.csv*.
 Auxiliary data should be given description names such as
 *country-demographics.csv* or *state-populations.csv*.
 Processed versions should be descriptively named
@@ -75,5 +75,5 @@ x | 0.15
 ## Sources and Licenses
 
 Provide sources for all data.
-If they differ from the defaults, specify the license(s) for the data and
-scripts.
+Specify the license(s) for any data and scripts if those licenses differ from
+the defaults given in the [README](../README.md).
