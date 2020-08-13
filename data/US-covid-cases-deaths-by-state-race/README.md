@@ -56,7 +56,7 @@ this directory.
 
 ## Example Analysis
 
-This [python script](data/create-expected-versus-observed-deaths-plots.py) was used
+This [python script](python/create-expected-versus-observed-deaths-plots.py) was used
 to compare the expected proportion of COVID deaths (based on the population)
 with the observed proportion of deaths.
 Each dot is a single state and the blue line is least squares linear regression
