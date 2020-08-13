@@ -32,7 +32,7 @@ def create_plot(group, df):
     plt.ylabel('Proportion of COVID deaths')
 
     plt.tight_layout()
-    plt.savefig('expected-versus-observed-deaths-{}.png'.format(group.lower()))
+    plt.savefig('output/expected-versus-observed-deaths-{}.png'.format(group.lower()))
     plt.close()
 
 
@@ -43,7 +43,7 @@ def main():
     matplotlib.rcParams['legend.frameon'] = False
 
     # load dataset; exclude US
-    df = pd.read_csv('US-covid-cases-deaths-population-by-state-race.csv',
+    df = pd.read_csv('data/US-covid-cases-deaths-population-by-state-race.csv',
                      index_col=0)
     df.drop('United States', inplace=True)
     df = df[pd.notnull(df.Deaths_Black_proportion)]

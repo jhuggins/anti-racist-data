@@ -64,9 +64,9 @@ state_abbreviations = {
 
 def main():
     # load datasets
-    covid_df = pd.read_csv('US-covid-cases-deaths-by-state-race.csv',
+    covid_df = pd.read_csv('data/US-covid-cases-deaths-by-state-race.csv',
                            index_col=0)
-    population_df = pd.read_csv('US-population-distribution-by-state.csv',
+    population_df = pd.read_csv('data/US-population-distribution-by-state.csv',
                                 header=2, index_col=0)
 
 
@@ -90,7 +90,7 @@ def main():
 
     # construct merged dataframe and write to disk
     df = population_df.join(covid_df, how='inner')
-    df.to_csv('US-covid-cases-deaths-population-by-state-race.csv',
+    df.to_csv('data/US-covid-cases-deaths-population-by-state-race.csv',
               index_label='Location')
 
 
