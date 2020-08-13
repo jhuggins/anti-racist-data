@@ -1,8 +1,8 @@
-# U.S. state-level COVID cases and deaths by race
+# U.S. state-level COVID-19 cases and deaths by race and ethnicity
 
 ## Overview
 
-Data on the number of COVID cases and deaths by race and ethnicity for each
+Data on the number of COVID-19 cases and deaths by race and ethnicity for each
 U.S. state and Washington D.C.
 Recent data on the racial/ethnic make-up of each state is included as well
 for comparison.

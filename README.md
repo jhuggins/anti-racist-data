@@ -10,9 +10,8 @@ If you are interested in contributing, details on how to do so are below.
 
 ## Datasets
 
-*A list of datasets with links and a short description will go here;
-perhaps organized by type of analysis/data type.*
-
+* [U.S. state-level COVID-19 cases and deaths by race and ethnicity](data/US-covid-cases-deaths-by-state-race).
+This data highlights the racially disparate impact of COVID-19.
 
 ## Contributing
 
