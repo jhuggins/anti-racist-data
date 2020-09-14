@@ -1,5 +1,5 @@
 ---
-title: "US School Demographics"
+title: "US Schools - Total Enrollment and AP Course Enrollment by Race"
 output: github_document
 editor_options: 
   chunk_output_type: console
@@ -11,12 +11,13 @@ knitr::opts_chunk$set(echo = TRUE, fig.path='output/')
 suppressPackageStartupMessages(library(tidyverse))
 ```
 
-# US Schools - Total Enrollment and AP Course Enrollment by Race
-
 ## Overview
 
+We use data from the Civil Rights Data Collection survey to investigate segregation in US schools.
+The original data set contains many variables on all aspects of school enrollment and opportunities and includes variables for both race and gender.
+In this analysis, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses.
 
-### Description
+## Description
 
 The data set included in the repository is derived from the [Civil Rights Data Collection](https://ocrdata.ed.gov/) (CRDC), a survey administered by the US Department of Education.
 The CRDC describes the survey as
@@ -35,7 +36,7 @@ We'll first read the data file.
 ap_by_race <- read_csv("data/school_ap_enrollment_by_race.csv")
 ```
 
-The table below shows a sample of three rows of thee data corresponding to two schools.
+The table below shows a sample of three rows of the data corresponding to two schools.
 
 ```{r, results="asis", echo=FALSE}
 set.seed(12345)
@@ -65,11 +66,11 @@ American Indian/Alaska Native <br> Asian <br> Black <br> Hispanic <br> Native Ha
 
 Run all scripts from this directory.
 
-The scripts folder has a script `clean_original.R` which can be used to convert the data from the [original source](#source) into the data in the `data` folder.
+The R folder has a script `clean_original.R` which can be used to convert the data from the [original source](#source) into the data in the `data` folder.
 As the original data is not included in this repository you will have to download and unzip the data, and then you need to change the `data_dir` variable in the script to the location where you unzipped the data.
 The script uses the `tidyverse` so you will need to run `install.packages("tidyverse")` if you have not already done so.
 
-The file `README.Rmd` can be used to create this readme file from the data in the `data` folder.
+The file `README.Rmd` can be used to create this README.md file from the data in the `data` folder.
 
 
 
@@ -79,8 +80,8 @@ The file `README.Rmd` can be used to create this readme file from the data in th
 ## Example Analysis
 
 
-In the analysis we below we investigate the racial make-up of AP programs within each school district as compared to the district as a whole.
-Specifically, for each school district we computer the proportion of students taking at least one AP that identify as students of color (SOC) and the proportion of all students that identify as SOC.
+In this analysis, we investigate the racial make-up of AP programs within each school district as compared to the district as a whole.
+Specifically, for each school district we compute the proportion of students taking at least one AP course that identify as students of color (SOC) and the proportion of all students that identify as SOC.
 Here we define SOC as any students who did not identify as White.
 In the code below we create a table with this data.
 Note, that we remove small school districts (<1000 students) and also those school districts where either 0% or 100% of AP students identified as SOC.
