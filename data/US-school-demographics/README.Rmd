@@ -1,0 +1,235 @@
+---
+title: "US Schools - Total Enrollment and AP Course Enrollment by Race"
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+options(show.signif.stars = FALSE)
+knitr::opts_chunk$set(echo = TRUE, fig.path='output/')
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+## Overview
+
+We use data from the Civil Rights Data Collection survey to investigate segregation in US schools.
+The original data set contains many variables on all aspects of school enrollment and opportunities and includes variables for both race and gender.
+In this analysis, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses.
+
+## Description
+
+The data set included in the repository is derived from the [Civil Rights Data Collection](https://ocrdata.ed.gov/) (CRDC), a survey administered by the US Department of Education.
+The CRDC describes the survey as
+
+> ... a survey of all public schools and school districts in the United States. The CRDC measures student access to courses, programs, staff, and resources that impact education equity and opportunity for students. The CRDC is a longstanding and critical aspect of the overall enforcement and monitoring strategy used by the Office for Civil Rights (OCR). In addition, the CRDC is a valuable resource for other federal agencies, policymakers and researchers, educators and school officials, parents and students, and other members of the public who seek data on student equity and opportunity.
+
+
+We've taken a subset of the data focused on enrollment in AP courses by race.
+
+### Data
+
+All code below can be run in R from this directory.
+We'll first read the data file.
+
+```{r load_data, message=FALSE}
+ap_by_race <- read_csv("data/school_ap_enrollment_by_race.csv")
+```
+
+The table below shows a sample of three rows of the data corresponding to two schools.
+
+```{r, results="asis", echo=FALSE}
+set.seed(12345)
+ap_by_race %>%
+  group_by(state, district, school) %>%
+  summarise() %>%
+  ungroup() %>%
+  slice_sample(n = 2) %>%
+  left_join(ap_by_race, by = c("state", "district", "school")) %>%
+  knitr::kable()
+```
+
+Each row provides data about a single school, either about total enrollment or enrollment in AP courses.
+
+Column name  | Column meaning | Example Values
+-------------|----------------|---------------
+state | US State (uppercase) | `ALABAMA`
+district | School district name | `Al Inst Deaf And Blind`
+school | School name | `Alabama School For Blind`
+ap | Whether the school offers any AP courses | `yes` OR `no`
+type | If `total` then the next columns refer to total enrollment numbers at the school. If `ap` then the next columns refer to the number of students enrolled in at least one AP course. | `total` OR `ap`
+total | Total of students all races | 112
+American Indian/Alaska Native <br> Asian <br> Black <br> Hispanic <br> Native Hawaiian/Pacific Islander <br> Two or More Races <br> White | 7 columns each indicating number of students identifying with each of the races. Students only identify as being in one of the categories. | 49
+
+
+### Scripts
+
+Run all scripts from this directory.
+
+The R folder has a script `clean_original.R` which can be used to convert the data from the [original source](#source) into the data in the `data` folder.
+As the original data is not included in this repository you will have to download and unzip the data, and then you need to change the `data_dir` variable in the script to the location where you unzipped the data.
+The script uses the `tidyverse` so you will need to run `install.packages("tidyverse")` if you have not already done so.
+
+The file `README.Rmd` can be used to create this README.md file from the data in the `data` folder.
+
+
+
+
+
+
+## Example Analysis
+
+
+In this analysis, we investigate the racial make-up of AP programs within each school district as compared to the district as a whole.
+Specifically, for each school district we compute the proportion of students taking at least one AP course that identify as students of color (SOC) and the proportion of all students that identify as SOC.
+Here we define SOC as any students who did not identify as White.
+In the code below we create a table with this data.
+Note, that we remove small school districts (<1000 students) and also those school districts where either 0% or 100% of AP students identified as SOC.
+
+```{r dist_percent_soc}
+district_percent_soc <- ap_by_race %>%
+  group_by(state, district, type) %>%
+  summarize(`% SOC` =100*(1- sum(White)/sum(total)), students = sum(total)) %>%
+  pivot_wider(
+    names_from = c("type"),
+    values_from = c("% SOC", "students"),
+    names_sep = " ",
+    values_fill = 0
+  ) %>%
+  filter(`% SOC ap` %% 1 != 0, `students total` > 1000)
+```
+
+The table below shows a sample of 14 school districts.
+The "% SOC total" and "% SOC ap" columns indicate the proportion of either all students or AP student, respectivaly, who identify as SOC.
+The "students total" and "students ap" represent the total number of students and the total number of AP students, respectively, in the district.
+In total there are `r nrow(district_percent_soc)` districts in this subset of the data.
+
+```{r dist_percent_soc_table, results="asis", echo=FALSE}
+set.seed(12345)
+district_percent_soc %>%
+  ungroup() %>%
+  slice_sample(n = 14) %>%
+  mutate_at(vars(`% SOC total`, `% SOC ap`), ~str_c(format(., digits = 1), "%")) %>%
+  knitr::kable(format = "markdown", digits = 0)
+```
+
+The differences in the % SOC columns gives information on the degree of segregation within each school district.
+If the schools were not segregated, we would expect that the proportion of SOC students among AP students and the proportion among all students to be relatively close as SOC would be as likely to take AP courses as their white peers.
+
+
+The figure below shows the % SOC ap plotted against the % SOC total.
+Each point represents a school district and the points are colored according to the difference in the two percentages.
+The size of the points is proportional to the total number of students in the district.
+The dashed line indicates the line where the percentages are equal.
+Points near the dashed line are also shown with more transparency.
+
+```{r echo=FALSE}
+p <- district_percent_soc %>% ungroup() %>% summarize(m = mean(`% SOC ap` < `% SOC total`)) %>% pull(m)
+p2 <- district_percent_soc %>% ungroup() %>% summarize(m = mean(`% SOC ap` < .5*`% SOC total`)) %>% pull(m)
+```
+
+Out of all districts, `r round(p * 100)`% have a lower proportion of SOC color in the their AP courses compared to the student body.
+In `r round(p2 * 100)`% of districts, the proportion of SOC in AP courses is less than half than among all students.
+
+```{r percent_soc_ap_v_total, dev="svg", out.width="100%", echo=FALSE}
+district_percent_soc %>%
+  ggplot(aes(
+    x = `% SOC total`,
+    y = `% SOC ap`,
+    color = after_stat(x - y),
+    alpha = after_stat(abs((x-y))),
+    size = `students total`
+  )) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = 2) +
+  theme_classic() +
+  scale_size_area(
+    "district size",
+    breaks = c(10000, 50000, 250000),
+    max_size = 10,
+    labels = function(x) str_c(x/1e3, ",000")) +
+    scale_color_gradient2(
+      "difference",
+      mid = "#333333",
+      high = "#3377FF",
+      low = "#FF7733") +
+    scale_alpha(guide = FALSE) +
+  annotate(
+    "text", x = 25, y = 80, angle = 33,
+    label = "higher proportion of SOC in 
+           AP classes compared to student body"
+  ) +
+  annotate(
+    "text", x = 70, y = 12, angle = 26,
+    label = "lower proportion of SOC in 
+           AP classes compared to student body"
+  ) +
+  xlab("% SOC among all students ") +
+  ylab("% SOC among AP students ")
+```
+
+
+
+A simple linear model predicting the % SOC among students enrolled in AP courses based on the % SOC among all students is computed.
+As the intercept is negative and the slope is less than one this indicates that the predicted % SOC among students enrolled in AP courses will be lower than what one would expect under equal representation.
+
+```{r}
+lm(log(`% SOC ap`) ~ log(`% SOC total`), district_percent_soc)
+```
+
+## Sources and Licenses
+
+  The original dataset was retrieved from [Civil Rights Data Collection (CRDC) for the 2015-16 School Year](https://www2.ed.gov/about/offices/list/ocr/docs/crdc-2015-16.html), specifically the (large) [zip file](https://www2.ed.gov/about/offices/list/ocr/docs/2015-16-crdc-data.zip) containing the entire 2015-2016 CRDC.
+
+The dataset is public-use.
+
+In using the data, we and any users of our derived data agree to follow the Usage Agreement below, as provided by the CRDC.
+
+> The data are collected in an aggregated format at the school level and district level. The CRDC does not collect personally identifiable information (e.g., studentís name, social security number, date of birth). To help prevent the CRDC from being used to identify any individuals, OCR requires that all users of the CRDC data agree that they will:
+>
+> * Make no use of the identity of any person discovered inadvertently, and advise OCR via email at ocrdata@ed.gov of any such discovery.
+> * Not link this dataset with individually identifiable data from other datasets.
+>
+> By downloading or using the CRDC dataset, you signify your agreement to comply with the above stated requirements.
+
+
+
+
+```{r include=FALSE, eval=FALSE}
+ap_by_race %>%
+  mutate(`% White` = White/total) %>%
+  filter(type == "total") %>%
+  ggplot(aes(x=`% White`, fill = ap)) + geom_density(alpha = .5)
+
+ap_by_race %>%
+  mutate(`% White` = White/total) %>%
+  filter(type == "total") %>%
+  ggplot(aes(x=`% White`, fill = ap)) +
+  geom_density(aes(y = after_stat(count)), alpha = .5)
+
+ap_by_race %>% filter(ap == "Yes") %>% 
+  mutate(`% White` = White/total) %>%
+  select(state, district, school, type, `% White`) %>%
+  pivot_wider(names_from = "type", values_from = "% White") %>%
+  mutate(ratio = ap/total) %>%
+  ggplot(aes(x = ratio, fill = state)) + geom_histogram() + scale_x_log10() +
+  scale_fill_discrete(guide = FALSE)
+
+ap_by_race %>%
+  mutate(`% White` = White/total) %>%
+  filter(type == "total") %>%
+  ggplot(aes(x=`% White`, fill = ap)) +
+  geom_histogram(bins = 10, color = "black", position = "dodge")
+
+ap_by_race %>% filter(ap == "Yes") %>% 
+  mutate(`% White` = White/total) %>%
+  select(state, district, school, type, `% White`) %>%
+  pivot_wider(names_from = "type", values_from = "% White")
+
+ap_by_race %>% filter(ap == "Yes") %>% 
+  mutate(`% White` = White/total) %>%
+  select(state, district, school, type, `% White`) %>%
+  pivot_wider(names_from = "type", values_from = "% White") %>%
+  mutate(ratio = ap - total) %>%
+  ggplot(aes(x=ratio)) + stat_ecdf()
+```
