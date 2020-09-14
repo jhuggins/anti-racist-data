@@ -1,0 +1,149 @@
+---
+title: "US School Demographics"
+author: "Daniel Sussman"
+date: "9/13/2020"
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.path='output/')
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+# US Schools - Total Enrollment and AP Course Enrollment by Race
+
+## Overview
+
+```{r load_data, echo=FALSE}
+ap_by_race <- suppressMessages(read_csv("data/school_ap_enrollment_by_race.csv"))
+```
+
+
+
+## Description
+
+
+
+
+### Data
+
+
+```{r, results="asis", echo=FALSE}
+set.seed(12345)
+ap_by_race %>%
+  group_by(state, district, school) %>%
+  summarise() %>%
+  ungroup() %>%
+  slice_sample(n = 2) %>%
+  left_join(ap_by_race, by = c("state", "district", "school")) %>%
+  knitr::kable()
+```
+
+
+### Scripts
+
+## Example Analysis
+
+```{r dist_percent_soc}
+district_percent_soc <- ap_by_race %>%
+  group_by(state, district, type) %>%
+  summarize(`% SOC` =100*(1- sum(White)/sum(total)), students = sum(total)) %>%
+  pivot_wider(
+    names_from = c("type"),
+    values_from = c("% SOC", "students"),
+    names_sep = " ",
+    values_fill = 0
+  ) %>%
+  filter(`% SOC ap` %% 1 != 0, `students total` > 1000)
+```
+
+```{r dist_percent_soc_table, results="asis", echo=FALSE}
+set.seed(12345)
+district_percent_soc %>%
+  ungroup() %>%
+  slice_sample(n = 14) %>%
+  mutate_at(vars(`% SOC total`, `% SOC ap`), ~str_c(format(., digits = 1), "%")) %>%
+  knitr::kable(format = "markdown", digits = 0)
+```
+
+```{r percent_soc_ap_v_total, dev="svg", out.width="100%", echo=FALSE}
+district_percent_soc %>%
+  ggplot(aes(
+    x = `% SOC total`,
+    y = `% SOC ap`,
+    color = after_stat(x - y),
+    alpha = after_stat(abs((x-y))),
+    size = `students total`
+  )) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = 2) +
+  theme_classic() +
+  scale_size_area(
+    "district size",
+    breaks = c(10000, 50000, 250000),
+    max_size = 10,
+    labels = function(x) str_c(x/1e3, ",000")) +
+    scale_color_gradient2(
+      "difference",
+      mid = "#333333",
+      high = "#3377FF",
+      low = "#FF7733") +
+    scale_alpha(guide = FALSE) +
+  annotate(
+    "text", x = 25, y = 80, angle = 33,
+    label = "higher proportion of SOC in 
+           AP classes compared to student body"
+  ) +
+  annotate(
+    "text", x = 70, y = 12, angle = 26,
+    label = "lower proportion of SOC in 
+           AP classes compared to student body"
+  ) +
+  xlab("% SOC among all students ") +
+  ylab("% SOC among AP students ")
+```
+
+## Sources and Licenses
+
+
+
+```{r include=FALSE, eval=FALSE}
+ap_by_race %>%
+  mutate(`% White` = White/total) %>%
+  filter(type == "total") %>%
+  ggplot(aes(x=`% White`, fill = ap)) + geom_density(alpha = .5)
+
+ap_by_race %>%
+  mutate(`% White` = White/total) %>%
+  filter(type == "total") %>%
+  ggplot(aes(x=`% White`, fill = ap)) +
+  geom_density(aes(y = after_stat(count)), alpha = .5)
+
+ap_by_race %>% filter(ap == "Yes") %>% 
+  mutate(`% White` = White/total) %>%
+  select(state, district, school, type, `% White`) %>%
+  pivot_wider(names_from = "type", values_from = "% White") %>%
+  mutate(ratio = ap/total) %>%
+  ggplot(aes(x = ratio, fill = state)) + geom_histogram() + scale_x_log10() +
+  scale_fill_discrete(guide = FALSE)
+
+ap_by_race %>%
+  mutate(`% White` = White/total) %>%
+  filter(type == "total") %>%
+  ggplot(aes(x=`% White`, fill = ap)) +
+  geom_histogram(bins = 10, color = "black", position = "dodge")
+
+ap_by_race %>% filter(ap == "Yes") %>% 
+  mutate(`% White` = White/total) %>%
+  select(state, district, school, type, `% White`) %>%
+  pivot_wider(names_from = "type", values_from = "% White")
+
+ap_by_race %>% filter(ap == "Yes") %>% 
+  mutate(`% White` = White/total) %>%
+  select(state, district, school, type, `% White`) %>%
+  pivot_wider(names_from = "type", values_from = "% White") %>%
+  mutate(ratio = ap - total) %>%
+  ggplot(aes(x=ratio)) + stat_ecdf()
+```
