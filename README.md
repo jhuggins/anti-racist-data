@@ -12,6 +12,10 @@ If you are interested in contributing, details on how to do so are below.
 
 * [U.S. state-level COVID-19 cases and deaths by race and ethnicity](data/US-covid-cases-deaths-by-state-race).
 This data highlights the racially disparate impact of COVID-19.
+An example analysis highlights state-level racial disparities in COVID-19 deaths. 
+* [US Schools - Total Enrollment and AP Course Enrollment by Race](data/US-school-demographics).
+Civil Rights Data Collection survey to investigate segregation in US schools.
+An example analysis highlights systemic racial inequalities in AP course enrollment. 
 
 ## Contributing
 
