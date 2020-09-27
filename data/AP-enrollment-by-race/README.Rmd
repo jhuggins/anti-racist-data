@@ -16,6 +16,7 @@ suppressPackageStartupMessages(library(tidyverse))
 We use data from the Civil Rights Data Collection survey to investigate segregation in US schools.
 The original data set contains many variables on all aspects of school enrollment and opportunities and includes variables for both race and gender.
 In this analysis, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses.
+A [derivative data](data/school_ap_enrollment_by_race.csv) set can be found in the data folder.
 
 ## Description
 
