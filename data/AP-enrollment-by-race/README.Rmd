@@ -176,7 +176,7 @@ A simple linear model predicting the % SOC among students enrolled in AP courses
 As the intercept is negative and the slope is less than one this indicates that the predicted % SOC among students enrolled in AP courses will be lower than what one would expect under equal representation.
 
 ```{r}
-lm(log(`% SOC ap`) ~ log(`% SOC total`), district_percent_soc)
+lm(`% SOC ap` ~ `% SOC total`, district_percent_soc)
 ```
 
 ## Sources and Licenses

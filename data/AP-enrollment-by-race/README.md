@@ -217,16 +217,16 @@ Out of all districts, 78% have a lower proportion of SOC color in the their AP c
 A simple linear model predicting the % SOC among students enrolled in AP courses based on the % SOC among all students is computed. As the intercept is negative and the slope is less than one this indicates that the predicted % SOC among students enrolled in AP courses will be lower than what one would expect under equal representation.
 
 ``` r
-lm(log(`% SOC ap`) ~ log(`% SOC total`), district_percent_soc)
+lm(`% SOC ap` ~ `% SOC total`, district_percent_soc)
 ```
 
     ## 
     ## Call:
-    ## lm(formula = log(`% SOC ap`) ~ log(`% SOC total`), data = district_percent_soc)
+    ## lm(formula = `% SOC ap` ~ `% SOC total`, data = district_percent_soc)
     ## 
     ## Coefficients:
-    ##        (Intercept)  log(`% SOC total`)  
-    ##          -0.002517            0.952484
+    ##   (Intercept)  `% SOC total`  
+    ##       -1.6771         0.9107
 
 Sources and Licenses
 --------------------
