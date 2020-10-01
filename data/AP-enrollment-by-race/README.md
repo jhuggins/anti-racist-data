@@ -154,7 +154,7 @@ Each row provides data about a single school, either about total enrollment or e
 <td>112</td>
 </tr>
 <tr class="odd">
-<td>American Indian/Alaska Native <br> Asian <br> Black <br> Hispanic <br> Native Hawaiian/Pacific Islander <br> Two or More Races <br> White</td>
+<td>- American Indian/Alaska Native <br> - Asian <br> - Black <br> - Hispanic <br> - Native Hawaiian/Pacific Islander <br> - Two or More Races <br> - White</td>
 <td>7 columns each indicating number of students identifying with each of the races. Students only identify as being in one of the categories.</td>
 <td>49</td>
 </tr>

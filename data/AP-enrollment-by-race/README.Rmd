@@ -62,7 +62,7 @@ school | School name | `Alabama School For Blind`
 ap | Whether the school offers any AP courses | `yes` OR `no`
 type | If `total` then the next columns refer to total enrollment numbers at the school. If `ap` then the next columns refer to the number of students enrolled in at least one AP course. | `total` OR `ap`
 total | Total of students all races | 112
-American Indian/Alaska Native <br> Asian <br> Black <br> Hispanic <br> Native Hawaiian/Pacific Islander <br> Two or More Races <br> White | 7 columns each indicating number of students identifying with each of the races. Students only identify as being in one of the categories. | 49
+- American Indian/Alaska Native <br> - Asian <br> - Black <br> - Hispanic <br> - Native Hawaiian/Pacific Islander <br> - Two or More Races <br> - White | 7 columns each indicating number of students identifying with each of the races. Students only identify as being in one of the categories. | 49
 
 
 ### Scripts
