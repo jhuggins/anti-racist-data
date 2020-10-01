@@ -4,7 +4,7 @@ US Schools - Total Enrollment and AP Course Enrollment by Race
 Overview
 --------
 
-We consider a dataset on school-district-level AP enrollment broken down by race derived from the Civil Rights Data Collection survey (CRDC). The CRDC has detailed data on all aspects of school enrollment and opportunities, broken down by both race and gender. In an example analysis to investigate segregation in US schools, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses. The [derivative data](data/school_ap_enrollment_by_race.csv) set can be found in the data folder.
+We consider a dataset on school-district-level AP enrollment broken down by race. The dataset is derived from the [Civil Rights Data Collection survey](http://crdc.ed.gov/) (CRDC). The CRDC has detailed data on all aspects of school enrollment and opportunities, broken down by both race and gender. In an example analysis to investigate segregation in US schools, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses. The [derivative data](data/school_ap_enrollment_by_race.csv) set can be found in the data folder.
 
 Description
 -----------
