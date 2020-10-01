@@ -4,7 +4,7 @@ US Schools - Total Enrollment and AP Course Enrollment by Race
 Overview
 --------
 
-We use data from the Civil Rights Data Collection survey to investigate segregation in US schools. The original data set contains many variables on all aspects of school enrollment and opportunities and includes variables for both race and gender. In this analysis, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses.
+We consider a dataset on school-district-level AP enrollment broken down by race. The dataset is derived from the [Civil Rights Data Collection survey](http://crdc.ed.gov/) (CRDC). The CRDC has detailed data on all aspects of school enrollment and opportunities, broken down by both race and gender. In an example analysis to investigate segregation in US schools, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses. The [derivative data](data/school_ap_enrollment_by_race.csv) set can be found in the data folder.
 
 Description
 -----------
@@ -154,7 +154,7 @@ Each row provides data about a single school, either about total enrollment or e
 <td>112</td>
 </tr>
 <tr class="odd">
-<td>American Indian/Alaska Native <br> Asian <br> Black <br> Hispanic <br> Native Hawaiian/Pacific Islander <br> Two or More Races <br> White</td>
+<td>- American Indian/Alaska Native <br> - Asian <br> - Black <br> - Hispanic <br> - Native Hawaiian/Pacific Islander <br> - Two or More Races <br> - White</td>
 <td>7 columns each indicating number of students identifying with each of the races. Students only identify as being in one of the categories.</td>
 <td>49</td>
 </tr>
@@ -165,7 +165,7 @@ Each row provides data about a single school, either about total enrollment or e
 
 Run all scripts from this directory.
 
-The R folder has a script `clean_original.R` which can be used to convert the data from the [original source](#source) into the data in the `data` folder. As the original data is not included in this repository you will have to download and unzip the data, and then you need to change the `data_dir` variable in the script to the location where you unzipped the data. The script uses the `tidyverse` so you will need to run `install.packages("tidyverse")` if you have not already done so.
+The R folder has a script [`clean_original.R`](R/clean_original.R) which can be used to convert the data from the [original source](#sources-and-licenses) into the data in the `data` folder. As the original data is not included in this repository you will have to download and unzip the data, and then you need to change the `data_dir` variable in the script to the location where you unzipped the data. The script uses the `tidyverse` so you will need to run `install.packages("tidyverse")` if you have not already done so.
 
 The file `README.Rmd` can be used to create this README.md file from the data in the `data` folder.
 
@@ -217,16 +217,16 @@ Out of all districts, 78% have a lower proportion of SOC color in the their AP c
 A simple linear model predicting the % SOC among students enrolled in AP courses based on the % SOC among all students is computed. As the intercept is negative and the slope is less than one this indicates that the predicted % SOC among students enrolled in AP courses will be lower than what one would expect under equal representation.
 
 ``` r
-lm(log(`% SOC ap`) ~ log(`% SOC total`), district_percent_soc)
+lm(`% SOC ap` ~ `% SOC total`, district_percent_soc)
 ```
 
     ## 
     ## Call:
-    ## lm(formula = log(`% SOC ap`) ~ log(`% SOC total`), data = district_percent_soc)
+    ## lm(formula = `% SOC ap` ~ `% SOC total`, data = district_percent_soc)
     ## 
     ## Coefficients:
-    ##        (Intercept)  log(`% SOC total`)  
-    ##          -0.002517            0.952484
+    ##   (Intercept)  `% SOC total`  
+    ##       -1.6771         0.9107
 
 Sources and Licenses
 --------------------
