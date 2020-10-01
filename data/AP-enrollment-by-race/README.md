@@ -4,7 +4,9 @@ US Schools - Total Enrollment and AP Course Enrollment by Race
 Overview
 --------
 
-We use data from the Civil Rights Data Collection survey to investigate segregation in US schools. The original data set contains many variables on all aspects of school enrollment and opportunities and includes variables for both race and gender. In this analysis, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses. A [derivative data](data/school_ap_enrollment_by_race.csv) set can be found in the data folder.
+Data on school district-level AP enrollment broken down by race and ethnicity. Civil Rights Data Collection survey to investigate segregation in US schools. The original data set contains many variables on all aspects of school enrollment and opportunities and includes variables for both race and gender. In an example analysis, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses.
+
+We built a dataset on school-district-level AP enrollment broken down by race based on the Civil Rights Data Collection survey (CRDC) to investigate segregation in US schools. The CRDC has detailed data on all aspects of school enrollment and opportunities, broken down by both race and gender. In an example analysis, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses. The [derivative data](data/school_ap_enrollment_by_race.csv) set can be found in the data folder.
 
 Description
 -----------
@@ -165,7 +167,7 @@ Each row provides data about a single school, either about total enrollment or e
 
 Run all scripts from this directory.
 
-The R folder has a script `clean_original.R` which can be used to convert the data from the [original source](#source) into the data in the `data` folder. As the original data is not included in this repository you will have to download and unzip the data, and then you need to change the `data_dir` variable in the script to the location where you unzipped the data. The script uses the `tidyverse` so you will need to run `install.packages("tidyverse")` if you have not already done so.
+The R folder has a script [`clean_original.R`](R/clean_original.R) which can be used to convert the data from the [original source](#sources-and-licenses) into the data in the `data` folder. As the original data is not included in this repository you will have to download and unzip the data, and then you need to change the `data_dir` variable in the script to the location where you unzipped the data. The script uses the `tidyverse` so you will need to run `install.packages("tidyverse")` if you have not already done so.
 
 The file `README.Rmd` can be used to create this README.md file from the data in the `data` folder.
 
