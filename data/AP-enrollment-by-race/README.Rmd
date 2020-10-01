@@ -14,7 +14,7 @@ suppressPackageStartupMessages(library(tidyverse))
 ## Overview
 
 
-We consider a dataset on school-district-level AP enrollment broken down by race.
+We consider a dataset on school-level AP enrollment broken down by race.
 The dataset is derived from the [Civil Rights Data Collection survey](http://crdc.ed.gov/) (CRDC).
 The CRDC has detailed data on all aspects of school enrollment and opportunities, broken down by both race and gender.
 In an example analysis to investigate segregation in US schools, we compare the proportions of students of color enrolled in AP courses to the proportion in the student body as a whole to examine segregation in students opportunities to take advanced courses.
