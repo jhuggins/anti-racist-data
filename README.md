@@ -13,7 +13,7 @@ If you are interested in contributing, details on how to do so are below.
 * [U.S. state-level COVID-19 cases and deaths by race and ethnicity](data/US-covid-cases-deaths-by-state-race).
 This data highlights the racially disparate impact of COVID-19.
 An example analysis highlights state-level racial disparities in COVID-19 deaths. 
-* [US Schools - Total Enrollment and AP Course Enrollment by Race](data/US-school-demographics).
+* [US Schools - Total Enrollment and AP Course Enrollment by Race](data/AP-enrollment-by-race).
 A dataset on school-level AP enrollment broken down by race.
 The dataset is derived from the [Civil Rights Data Collection survey](http://crdc.ed.gov/) (CRDC).
 An example analysis highlights systemic racial inequalities in AP course enrollment across school districts.
